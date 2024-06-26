@@ -7,10 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
-
+  build-and-unit-test:
     runs-on: ubuntu-latest
-
     steps:
     - name : Checkout the code
       uses: actions/checkout@v4
@@ -25,3 +23,24 @@ jobs:
       run: npm run test:unit
     - name: Display softuni username
       run: echo "timpetrovv"
+
+execute-ui-test:
+  needs: build-and-unit-test
+  build-and-unit-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name : Checkout the code
+      uses: actions/checkout@v4
+    - name: Use Node.js 20x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: Install npn dependencies  
+      run: npm ci
+    - name: Install Playwright browsers
+      run: npx playwright install
+    - name: Start the application
+      run: npm run start & 
+    - name: Execute the UI tests
+      run: npn run test:ui
