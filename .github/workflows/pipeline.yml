@@ -24,9 +24,8 @@ jobs:
     - name: Display softuni username
       run: echo "timpetrovv"
 
-execute-ui-test:
-  needs: build-and-unit-test
-  build-and-unit-test:
+  execute-ui-test:
+    needs: build-and-unit-test
     runs-on: ubuntu-latest
     steps:
     - name : Checkout the code
