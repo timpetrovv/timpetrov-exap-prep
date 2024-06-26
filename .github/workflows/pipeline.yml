@@ -42,4 +42,4 @@ jobs:
     - name: Start the application
       run: npm run start & 
     - name: Execute the UI tests
-      run: npn run test:ui
+      run: npm run test:ui
